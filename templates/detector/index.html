@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect Monuments</title>
+</head>
+<body>
+    
+    {% comment %} way to include static files <img src={%static "images/hello.jpg"%} alt="noice"> {% endcomment %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    {% if submit_success %}
+        <img src={{img_obj}} alt = "wtf">
+    {% endif %}
+
+</body>
+</html>
