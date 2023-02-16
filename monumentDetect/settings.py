@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 # change this in production
 CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS=['detectmonuments.azurewebsites.net','127.0.0.1']
 
 # CORS_ORIGIN_WHITELIST = [
 #     'https://example.com',
