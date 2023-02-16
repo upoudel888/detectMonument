@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-z%%0rer!k-+^h_5$ltcn4ttyxo(72^5w&8px9i9h+0x1-ipwu6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['detectmonuments.azurewebsites.net','127.0.0.1']
 
 
 # Application definition
@@ -52,7 +52,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware"
+    "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
     
 ]
 # change this in production
@@ -144,3 +145,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafolder")
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATICFILES_DIRS = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
