@@ -10,12 +10,13 @@ model = None
 
 def get_model():
     global model
+
     if model is None:
         model =  model = torch.hub.load('api\yolov5', 'custom', path = 'api\yolov5\weights\\best.pt', source = 'local',device='cpu')
 
 @api_view(['POST'])
 def detect_image(request):
-    
+
     # lazy loading the model
     get_model()
     # Get the image from the request
