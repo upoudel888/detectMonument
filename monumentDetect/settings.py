@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['detectmonuments.azurewebsites.net','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    # "whitenoise.runserver_nostatic",
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -136,7 +136,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
 		os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR)
+STATIC_ROOT = os.path.join(os.path.join(BASE_DIR),'staticfiles')
 
 # base url to serve media files
 MEDIA_URL = '/media/'

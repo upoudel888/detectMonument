@@ -1,14 +1,14 @@
-import torch
+from .apps import ApiConfig
 import numpy as np
 import os
 from PIL import Image
 
-model = torch.hub.load('api\yolov5', 'custom', path = 'api\yolov5\weights\\best.pt', source = 'local',device='cpu')
 
 def get_predictions(img):
 
     dim = img.size
-    results = model(img)
+    
+    results = ApiConfig.model(img,size=320)
     # getting cumulative xmin ymin xmax ymax conf_score class_label
     output = results.xyxy[0]
     # converting to numpy
