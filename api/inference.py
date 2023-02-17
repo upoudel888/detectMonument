@@ -1,14 +1,13 @@
-from .apps import ApiConfig
 import numpy as np
 import os
 from PIL import Image
 
 
-def get_predictions(img):
+def get_predictions(model,img):
 
     dim = img.size
     
-    results = ApiConfig.model(img,size=320)
+    results = model(img,size=320)
     # getting cumulative xmin ymin xmax ymax conf_score class_label
     output = results.xyxy[0]
     # converting to numpy
