@@ -1,7 +1,8 @@
 import torch
 from PIL import Image
 from .inference import get_predictions
-
+import os
+from django.conf import settings
 # Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,7 +13,9 @@ def get_model():
     global model
 
     if model is None:
-        model =  model = torch.hub.load('api\yolov5', 'custom', path = 'api\yolov5\weights\\best.pt', source = 'local',device='cpu')
+        weights_path = os.path.join(settings.BASE_DIR, 'api', 'yolov5', 'weights', 'best.pt')
+        yolo_path = os.path.join(settings.BASE_DIR,'api','yolov5')
+        model =  model = torch.hub.load(yolo_path, 'custom', path = weights_path, source = 'local',device='cpu')
 
 @api_view(['POST'])
 def detect_image(request):
