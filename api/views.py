@@ -13,7 +13,7 @@ def get_model():
     global model
 
     if model is None:
-        weights_path = os.path.join(settings.BASE_DIR, 'api', 'yolov5', 'weights', 'best.pt')
+        weights_path = os.path.join(settings.BASE_DIR, 'api', 'best.pt')
         yolo_path = os.path.join(settings.BASE_DIR,'api','yolov5')
         model =  model = torch.hub.load(yolo_path, 'custom', path = weights_path, source = 'local',device='cpu',force_reload=True)
 
