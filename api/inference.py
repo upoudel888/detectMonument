@@ -12,6 +12,20 @@ def get_predictions(model,img):
     output = results.xyxy[0]
     # converting to numpy
     new_output = output.numpy()
+
+    # when there are no detections return all zeros
+    if(not np.any(new_output)):
+        # Create output arrays of the desired sizes
+        bbox_out = np.zeros((1, 10, 4))
+        classes_out = np.zeros((1, 10))
+        score_out = np.zeros((1, 10))
+        num_boxes_out = np.zeros((1,))
+
+        return [bbox_out, classes_out, score_out, num_boxes_out]
+
+
+
+
     # retrieving bbox classes score and class_no from cumulative output
     bbox = new_output[...,:4]
     classes = new_output[...,5:6]
