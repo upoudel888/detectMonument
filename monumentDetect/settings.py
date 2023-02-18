@@ -132,7 +132,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# if we are working in production then load static files from collestatic folder
+if(DEBUG):
+    STATIC_URL = 'static/'
+else:
+    STATIC_URL = 'staticfiles/'
+
 STATICFILES_DIRS = [
 		os.path.join(BASE_DIR,'static')
 ]

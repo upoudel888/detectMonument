@@ -10,5 +10,5 @@ def generate_filename(instance,filename):
     
 
 class UserImages(models.Model):
-    img = models.ImageField(upload_to=generate_filename,blank=True)
+    img = models.ImageField(upload_to=generate_filename,null=True,blank=False)
 # Create your models here.

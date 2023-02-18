@@ -39,7 +39,6 @@ def sayHello(request):
 
     if(request.method == "POST"):
         form = forms.UserImagesForm(request.POST,request.FILES)
-        print(request.FILES)
         if(form.is_valid()):
             instance = form.save()
             context = {

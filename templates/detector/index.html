@@ -6,21 +6,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static 'css/index.css'%}>
     <title>Detect Monuments</title>
 </head>
 <body>
     
-   <img src={%static "images/hello.jpg"%} alt="noice">
-   <h1>this is me trying to work with static files</h1>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-    {% if submit_success %}
-        <img src={{img_obj}} alt = "wtf">
-    {% endif %}
+   {% comment %} <img src={%static "images/hello.jpg"%} alt="noice"> {% endcomment %}
+   <div class="form-container">
+       <form class = "form-inner" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+           {{ form.as_p }}
+           <input type="submit" value="Submit">
+       </form>
+       {% if submit_success %}
+           <img src={{img_obj}} alt = "wtf">
+       {% endif %}
+   </div>
 
 </body>
 </html>
