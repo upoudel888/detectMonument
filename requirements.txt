@@ -1,3 +1,4 @@
+whitenoise==6.3.0
 torch==1.13.1
 torchaudio==0.13.1
 torchvision==0.14.1
@@ -8,7 +9,6 @@ djangorestframework==3.14.0
 pandas==1.5.3
 Pillow==9.4.0
 notebook==6.5.2
-whitenoise==6.3.0
 wincertstore==0.2
 numpy==1.24.2
 opencv-python-headless==4.6.0.66
