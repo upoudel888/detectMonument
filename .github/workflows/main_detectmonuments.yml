@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'detectMonuments'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A709BA35BA0F475097E689A28B0DCDD3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1AD01D327AE34ED691A1163FB1B64006 }}
