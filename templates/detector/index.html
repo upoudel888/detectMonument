@@ -15,7 +15,7 @@
    <div class="form-container">
        <form class = "form-inner" method="POST" enctype="multipart/form-data">
            {% csrf_token %}
-           {{ form.as_p }}
+           {{ form.as_div }}
            <input type="submit" value="Submit">
        </form>
        {% if submit_success %}

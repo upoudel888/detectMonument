@@ -44,3 +44,31 @@ img{
     box-shadow: 0 0 4px rgba(0,0,0,0.2);
     border-radius: 1.25%;
 }
+@media screen and (max-width : 1200px) {
+    .form-inner {
+        width: 45%;
+    } 
+}
+  
+@media  screen and (max-width : 992px) {
+    .form-inner {
+        width: 55%;
+    } 
+}
+@media  screen and (max-width : 688px) {
+    .form-inner {
+        width: 75%;
+    }
+}
+@media  screen and (max-width : 560px) {
+    .form-inner {
+        width: 85%;
+    }
+
+}
+
+@media screen and (max-width:350px) {
+    .form-inner {
+        width: 95%;
+    }
+}

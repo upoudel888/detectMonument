@@ -5,62 +5,50 @@ from PIL import Image
 
 def get_predictions(model,img):
 
-    dim = img.size
-    
+    width,height = img.size    
+    # running the model
     results = model(img,size=320)
     # getting cumulative xmin ymin xmax ymax conf_score class_label
     output = results.xyxy[0]
     # converting to numpy
-    new_output = output.numpy()
+    output_arr = output.numpy()
+    # array of dictionaries to return
+    final_arr = []
+    # when there are no detections return nothing
+    if(not np.any(output_arr)):
+        return final_arr
 
-    # when there are no detections return all zeros
-    if(not np.any(new_output)):
-        # Create output arrays of the desired sizes
-        bbox_out = np.zeros((1, 10, 4))
-        classes_out = np.zeros((1, 10))
-        score_out = np.zeros((1, 10))
-        num_boxes_out = np.zeros((1,))
+    every_monument = ['bg', 'badrinath temple', 'basantapur tower', 'bhagavati temple', 'bhairavnath temple', 
+        'bhaktapur tower', 'bhimeleshvara', 'bhimsen temple', 'bhupatindra malla column', 'bhuvana lakshmeshvara',
+        'chasin dega', 'chayasilin mandap', 'dattatreya temple', 'degu tale temple_KDS', 'fasidega temple',
+        'gaddi durbar', 'garud', 'golden gate', 'gopinath krishna temple', 'hanuman idol', 'indrapura',
+        'jagannatha temple', 'kala-bhairava', 'kasthamandap', 'kavindrapura sattal', 'kedamatha tirtha', 'kirtipur tower', 
+        'kumari ghar', 'lalitpur tower', 'mahadev temple', 'narayan temple', 'national gallery', 'nyatapola temple',
+        'palace of the 55 windows', 'panchamukhi hanuman', 'pratap malla column', 'shiva temple', 'shveta bhairava',
+        'siddhi lakshmi temple', 'simha sattal', 'taleju bell_BDS', 'taleju bell_KDS', 'taleju temple', 'trailokya mohan',
+        'vastala temple', 'vishnu temple']
+    # output_arr variable format for an image
+    #  xmin ymin xmax ymax conf_score class_label
+    #  [[          0      245.61      201.34      463.53     0.87713          33]
+    #  [     394.69      138.53      530.92      472.24     0.84944          44]
+    #  [     292.25      293.58      356.51      428.44     0.80411          40]
+    #  [     189.05      268.21      253.16      438.15     0.73511          38]
+    #  [          0      337.43      53.189      477.89     0.55997          17]
+    #  [     251.73      259.03      303.86      477.59     0.40175           8]]
 
-        return [bbox_out, classes_out, score_out, num_boxes_out]
-
-
-
-
-    # retrieving bbox classes score and class_no from cumulative output
-    bbox = new_output[...,:4]
-    classes = new_output[...,5:6]
-    score = new_output[...,4:5]
-
-    # converting above variables to desired dimensions
-    # (1,10,4), (1,10) , (1,10) , (1)
-    # bbox classes scores class_no
-
-    # helper function to normalize the final results
-    def normalize_xy(arr):
-        width,height = dim
-        arr[0] /= width
-        arr[1] /= height
-        arr[2] /= width
-        arr[3] /= height
-        return arr
-
-    # Compute the desired sizes
-    max_boxes = 10
-
-    # Create output arrays of the desired sizes
-    bbox_out = np.zeros((1, max_boxes, 4))
-    classes_out = np.zeros((1, max_boxes))
-    score_out = np.zeros((1, max_boxes))
-    num_boxes_out = np.zeros((1,))
-
-    # Copy the input arrays to output arrays
-    num_boxes = min(max_boxes, bbox.shape[0])
-    bbox_out[0, :num_boxes, :] = np.array(list(map(normalize_xy,bbox[:num_boxes, :])))
-    classes_out[0, :num_boxes] = classes[:num_boxes,:].flatten()
-    score_out[0, :num_boxes] = score[:num_boxes, :].flatten()
-    num_boxes_out[0] = max_boxes
-
-    return [bbox_out, classes_out, score_out, num_boxes_out]
+    # creating corresponding dictionary for every detection and appending into an array
+    for i in output_arr:
+        dict = {"rect" : { "w" : (i[2]-i[0]) / width ,      #width 
+                            "x" : i[0] / width ,            #xmin
+                            "h" : (i[3]-i[1]) / height ,    #height
+                            "y" : i[1] / height,            #ymin
+                            },
+                "confidenceInClass" : i[4],
+                "DetectedClass" : every_monument[int(i[5])]
+                }
+        final_arr.append(dict)
+        
+    return final_arr
 
 
 if __name__ == '__main__':
