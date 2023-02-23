@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.detect_image),
+    path("", views.detect_monuments),
+    path("local/",views.detect_monuments_local)
 ]

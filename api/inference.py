@@ -44,7 +44,7 @@ def get_predictions(model,img):
                             "y" : i[1] / height,            #ymin
                             },
                 "confidenceInClass" : i[4],
-                "DetectedClass" : every_monument[int(i[5])]
+                "detectedClass" : every_monument[int(i[5])]
                 }
         final_arr.append(dict)
         

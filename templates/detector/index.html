@@ -13,7 +13,7 @@
     
    {% comment %} <img src={%static "images/hello.jpg"%} alt="noice"> {% endcomment %}
    <div class="form-container">
-       <form class = "form-inner" method="POST" enctype="multipart/form-data">
+       <form actiion = "api/local/"class = "form-inner" method="POST" enctype="multipart/form-data">
            {% csrf_token %}
            {{ form.as_div }}
            <input type="submit" value="Submit">
