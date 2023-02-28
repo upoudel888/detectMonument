@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static 'css/index.css'%}>
+    <title>Image Predictions</title>
+</head>
+<body>
+    
+   <div class="prediction-container">
+        {% comment %} displaying the user image / later on displaying image with bbox{% endcomment %}
+       <div class="user-image">
+            <img src="data:image/png;base64,{{ image_data }}" alt="Image with Bounding Boxes">
+       </div>
+       {% comment %} displaying the predictions {% endcomment %}
+       <div class="predictions-main">
+            {% if predictions %}
+                {% for class,prob in predictions %}
+                    <div class="predictions">
+                        <div class="classes">{{class}}</div>
+                        <div class="prob">{{prob}}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="predictions"> No Monument Detected</div>
+            {% endif %}
+            
+        </div>
+       <form action="/" method="GET">
+            <input type="submit" value="Back">
+        </form>
+    </div>
+    
+
+</body>
+</html>

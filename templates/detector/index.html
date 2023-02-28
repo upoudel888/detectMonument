@@ -13,14 +13,11 @@
     
    {% comment %} <img src={%static "images/hello.jpg"%} alt="noice"> {% endcomment %}
    <div class="form-container">
-       <form actiion = "api/local/"class = "form-inner" method="POST" enctype="multipart/form-data">
+       <form action = "api/local/" class = "form-inner" method="POST" enctype="multipart/form-data">
            {% csrf_token %}
            {{ form.as_div }}
            <input type="submit" value="Submit">
        </form>
-       {% if submit_success %}
-           <img src={{img_obj}} alt = "wtf">
-       {% endif %}
    </div>
 
 </body>

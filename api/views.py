@@ -1,15 +1,22 @@
-import torch
+# for image display on UI
 from PIL import Image
+from io import BytesIO
+import base64
+# for inference
+import torch
 from .inference import get_predictions # function that get predictions
+# setting up paths
 import os
 from django.conf import settings
+# for rendering showfile.html
+from django.shortcuts import render,redirect
 
-# Create your views here.
+# DRF api view and Response
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+# creating a global model that loads on the first call to the API
 model = None
-
 def get_model():
     global model
 
@@ -28,7 +35,7 @@ def detect_monuments(request):
     # Get the image from the request
     image = request.FILES.get('img')
 
-    # Use PIL to open the image and get its size
+    # Use PIL to open the image and get run predictions
     predictions = []
     with Image.open(image) as img:
         predictions = get_predictions(model,img)
@@ -36,18 +43,40 @@ def detect_monuments(request):
     # Return the size in JSON format
     return Response({'predictions': predictions})
 
-@api_view(['POST'])
+
+# this handles the POST request from detector app
 def detect_monuments_local(request):
+    if(request.method == "POST"):
+        # lazy loading the model
+        get_model()
+        # Get the image from the request
+        image = request.FILES.get('img')
 
-    # lazy loading the model
-    get_model()
-    # Get the image from the request
-    image = request.FILES.get('img')
+        # Use PIL to open the image and run predictions
+        predictions = []
+        img_str = ""
+        with Image.open(image) as img:
+            predictions = get_predictions(model,img,return_raw = True)
+            # convert the PIL image into byte buffer
+            img_buffer = BytesIO()
+            img.save(img_buffer,format="PNG")
+            #encode the byte buffer as a base64 string
+            img_str = base64.b64encode(img_buffer.getvalue()).decode('utf-8')
+        
+        # creating predictions array to display in html page
+        detected_classes = []
+        probability_values = []
+        for detection in predictions:
+            detected_classes.append(detection["DetectedClass"])
+            probability_values.append(detection["confidenceInClass"])
 
-    # Use PIL to open the image and get its size
-    predictions = []
-    with Image.open(image) as img:
-        predictions = get_predictions(model,img)
+        # context to pass to the render function
+        context = {"image_data" : img_str,
+                   "predictions": list(zip(detected_classes,probability_values))}
+        # render the contents to the UI
+        return render(request,"detector/showfile.html",context) 
+    
+    # redirect for the back button in showfile.html
+    if(request.method == "GET"):
+        return redirect('/')
 
-    # Return the size in JSON format
-    return Response({'predictions': predictions})
