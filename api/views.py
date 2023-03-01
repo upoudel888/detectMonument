@@ -15,7 +15,8 @@ from django.shortcuts import render,redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# creating a global model that loads on the first call to the API
+# creating a global model that loads when api aps loads successfully
+# checkout apps.py/ready(self) function
 model = None
 def get_model():
     global model
@@ -30,8 +31,6 @@ def get_model():
 @api_view(['POST'])
 def detect_monuments(request):
 
-    # lazy loading the model
-    get_model()
     # Get the image from the request
     image = request.FILES.get('img')
 
@@ -47,8 +46,7 @@ def detect_monuments(request):
 # this handles the POST request from detector app
 def detect_monuments_local(request):
     if(request.method == "POST"):
-        # lazy loading the model
-        get_model()
+        
         # Get the image from the request
         image = request.FILES.get('img')
 
@@ -78,5 +76,5 @@ def detect_monuments_local(request):
     
     # redirect for the back button in showfile.html
     if(request.method == "GET"):
-        return redirect('/')
+        return redirect('')
 
