@@ -18,15 +18,30 @@ def get_predictions(model,img,return_raw = False):
     if(not np.any(output_arr)):
         return final_arr
 
-    every_monument = ['bg', 'badrinath temple', 'basantapur tower', 'bhagavati temple', 'bhairavnath temple', 
-        'bhaktapur tower', 'bhimeleshvara', 'bhimsen temple', 'bhupatindra malla column', 'bhuvana lakshmeshvara',
-        'chasin dega', 'chayasilin mandap', 'dattatreya temple', 'degu tale temple_KDS', 'fasidega temple',
-        'gaddi durbar', 'garud', 'golden gate', 'gopinath krishna temple', 'hanuman idol', 'indrapura',
-        'jagannatha temple', 'kala-bhairava', 'kasthamandap', 'kavindrapura sattal', 'kedamatha tirtha', 'kirtipur tower', 
-        'kumari ghar', 'lalitpur tower', 'mahadev temple', 'narayan temple', 'national gallery', 'nyatapola temple',
-        'palace of the 55 windows', 'panchamukhi hanuman', 'pratap malla column', 'shiva temple', 'shveta bhairava',
-        'siddhi lakshmi temple', 'simha sattal', 'taleju bell_BDS', 'taleju bell_KDS', 'taleju temple', 'trailokya mohan',
-        'vastala temple', 'vishnu temple']
+    # every_monument = ['bg', 'badrinath temple', 'basantapur tower', 'bhagavati temple', 'bhairavnath temple', 'bhaktapur tower', 
+    #                   'bhimeleshvara', 'bhimsen temple', 'bhupatindra malla column', 'bhuvana lakshmeshvara', 'chasin dega',
+    #                     'chayasilin mandap', 'dattatreya temple', 'degu tale temple_KDS', 'fasidega temple', 'gaddi durbar',
+    #                     'garud', 'golden gate', 'gopinath krishna temple', 'hanuman idol', 'indrapura', 'jagannatha temple', 
+    #                     'kala-bhairava', 'kasthamandap', 'kavindrapura sattal', 'kedamatha tirtha', 'kirtipur tower', 'kumari ghar',
+    #                     'lalitpur tower', 'mahadev temple', 'narayan temple', 'national gallery', 'nyatapola temple', 'palace of the 55 windows',
+    #                     'panchamukhi hanuman', 'pratap malla column', 'shiva temple', 'shveta bhairava', 'siddhi lakshmi temple', 'simha sattal',
+    #                     'taleju bell_BDS', 'taleju bell_KDS', 'taleju temple', 'trailokya mohan', 'vastala temple', 'vishnu temple',
+    #                     'bhimsen temple_PDS', 'char narayan temple', 'chyasim deval', 'garud statue', 'harishankar temple',
+    #                     'krishna mandir', 'mani ganesh temple', 'mani mandap','royal palace_PDS', 'taleju bell_PDS', 'taleju temple north',
+    #                       'taleju temple south', 'vishwanath temple', 'yognarendra malla statue']
+
+    every_monument = ['badrinath temple', 'basantapur tower', 'bhagavati temple', 'bhairavnath temple', 'bhaktapur tower',
+                     'bhimeleshvara', 'bhimsen temple', 'bhupatindra malla column', 'bhuvana lakshmeshvara', 'chasin dega',
+                    'chayasilin mandap', 'dattatreya temple', 'degu tale temple_KDS', 'fasidega temple', 'gaddi durbar', 
+                    'garud', 'golden gate', 'gopinath krishna temple', 'hanuman idol', 'indrapura', 'jagannatha temple', 
+                    'kala-bhairava', 'kasthamandap', 'kavindrapura sattal', 'kedamatha tirtha', 'kirtipur tower', 'kumari ghar',
+                    'lalitpur tower', 'mahadev temple', 'narayan temple', 'national gallery', 'nyatapola temple', 
+                    'palace of the 55 windows', 'panchamukhi hanuman', 'pratap malla column', 'shiva temple',
+                    'shveta bhairava', 'siddhi lakshmi temple', 'simha sattal', 'taleju bell_BDS', 'taleju bell_KDS', 
+                    'taleju temple', 'trailokya mohan', 'vastala temple', 'vishnu temple', 'bhimsen temple_PDS', 
+                    'char narayan temple', 'chyasim deval', 'garud statue', 'harishankar temple', 'krishna mandir',
+                    'mani ganesh temple', 'mani mandap', 'royal palace_PDS', 'taleju bell_PDS', 'taleju temple north', 
+                    'taleju temple south', 'vishwanath temple', 'yognarendra malla statue']
 
     # output_arr variable format for an images
     #  xmin ymin xmax ymax conf_score class_label
@@ -43,7 +58,7 @@ def get_predictions(model,img,return_raw = False):
     
     # removing the probability scores less than 50
     # keeping the number of detections per class 1
-    THRESHOLD = 0.70
+    THRESHOLD = 0.55
     if(return_raw) : THRESHOLD = 0.0
     
     output_arr1 = []    # array that contains bboxes with distinct classes
