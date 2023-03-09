@@ -19,6 +19,8 @@ def get_predictions(model,img,return_raw = False):
     final_arr = []
     # when there are no detections return nothing
     if(not np.any(output_arr)):
+        if(return_raw):
+            return img,final_arr
         return final_arr
 
     # every_monument = ['bg', 'badrinath temple', 'basantapur tower', 'bhagavati temple', 'bhairavnath temple', 'bhaktapur tower', 
