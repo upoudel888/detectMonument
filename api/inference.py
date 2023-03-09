@@ -10,6 +10,9 @@ def get_predictions(model,img,return_raw = False):
     results = model(img,size=320)
     # getting cumulative xmin ymin xmax ymax conf_score class_label
     output = results.xyxy[0]
+    # made changes to models/common.py line 770 to return the image with bbox when 
+    # retults.show() is done
+    bbox_img = results.show()
     # converting to numpy
     output_arr = output.numpy()
     # array of dictionaries to return
@@ -58,7 +61,7 @@ def get_predictions(model,img,return_raw = False):
     
     # removing the probability scores less than 50
     # keeping the number of detections per class 1
-    THRESHOLD = 0.40
+    THRESHOLD = 0.45
     if(return_raw) : THRESHOLD = 0.0
     
     output_arr1 = []    # array that contains bboxes with distinct classes
@@ -103,7 +106,12 @@ def get_predictions(model,img,return_raw = False):
     
     # changing the final arrays of dictionaries before returning
     # maximum detections per class 1 ( choose the one with maximum probability value)
-        
+
+    # this is returned when inferencing with form
+    if(return_raw):
+        print(bbox_img)
+        return bbox_img,final_arr 
+    # this is returned in case of API request
     return final_arr
 
 

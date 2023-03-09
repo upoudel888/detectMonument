@@ -54,10 +54,10 @@ def detect_monuments_local(request):
         predictions = []
         img_str = ""
         with Image.open(image) as img:
-            predictions = get_predictions(model,img,return_raw = True)
+            bbox_img,predictions = get_predictions(model,img,return_raw = True)
             # convert the PIL image into byte buffer
             img_buffer = BytesIO()
-            img.save(img_buffer,format="PNG")
+            bbox_img.save(img_buffer,format="PNG")
             #encode the byte buffer as a base64 string
             img_str = base64.b64encode(img_buffer.getvalue()).decode('utf-8')
         

@@ -767,7 +767,9 @@ class Detections:
 
             im = Image.fromarray(im.astype(np.uint8)) if isinstance(im, np.ndarray) else im  # from np
             if show:
-                display(im) if is_notebook() else im.show(self.files[i])
+                # made changes herer
+                return im
+                #display(im) if is_notebook() else im.show(self.files[i])
             if save:
                 f = self.files[i]
                 im.save(save_dir / f)  # save
@@ -785,7 +787,9 @@ class Detections:
 
     @TryExcept('Showing images is not supported in this environment')
     def show(self, labels=True):
-        self._run(show=True, labels=labels)  # show results
+        bbox_img = self._run(show=True, labels=labels)  # gets them image with bounding box
+        return bbox_img
+
 
     def save(self, labels=True, save_dir='runs/detect/exp', exist_ok=False):
         save_dir = increment_path(save_dir, exist_ok, mkdir=True)  # increment save_dir
