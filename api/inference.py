@@ -58,7 +58,7 @@ def get_predictions(model,img,return_raw = False):
     
     # removing the probability scores less than 50
     # keeping the number of detections per class 1
-    THRESHOLD = 0.55
+    THRESHOLD = 0.40
     if(return_raw) : THRESHOLD = 0.0
     
     output_arr1 = []    # array that contains bboxes with distinct classes
