@@ -109,7 +109,7 @@ def get_predictions(model,img,return_raw = False):
     # changing the final arrays of dictionaries before returning
     # maximum detections per class 1 ( choose the one with maximum probability value)
 
-    # this is returned when inferencing with form
+    # this is returned when inferencing with UI form
     if(return_raw):
         print(bbox_img)
         return bbox_img,final_arr 
