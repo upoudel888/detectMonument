@@ -20,4 +20,3 @@ GitPython==3.1.31
 scipy==1.10.0
 smmap==5.0.0
 wheel==0.38.4
-Cactus==3.3.3
