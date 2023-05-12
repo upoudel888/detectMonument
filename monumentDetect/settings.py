@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-z%%0rer!k-+^h_5$ltcn4ttyxo(72^5w&8px9i9h+0x1-ipwu6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['detectmonuments.azurewebsites.net','127.0.0.1','detectmonuments.netlify.app']
+ALLOWED_HOSTS = ['detectmonuments.azurewebsites.net','127.0.0.1','detectmonument-production.up.railway.app']
 
 
 # Application definition
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 # change this in production
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS=['https://detectmonuments.azurewebsites.net','https://detectmonuments.netlify.app']
+CSRF_TRUSTED_ORIGINS=['https://detectmonuments.azurewebsites.net','https://detectmonument-production.up.railway.app']
 
 # CORS_ORIGIN_WHITELIST = [
 #     'https://example.com',
