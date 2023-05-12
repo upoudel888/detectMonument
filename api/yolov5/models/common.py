@@ -767,7 +767,7 @@ class Detections:
 
             im = Image.fromarray(im.astype(np.uint8)) if isinstance(im, np.ndarray) else im  # from np
             if show:
-                # made changes herer
+                # made changes here
                 return im
                 #display(im) if is_notebook() else im.show(self.files[i])
             if save:

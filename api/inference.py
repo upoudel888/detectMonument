@@ -7,7 +7,7 @@ def get_predictions(model,img,return_raw = False):
 
     width,height = img.size    
     # running the model
-    results = model(img,size=320)
+    results = model(img,size=512)
     # getting cumulative xmin ymin xmax ymax conf_score class_label
     output = results.xyxy[0]
     # made changes to models/common.py line 770 to return the image with bbox when 
