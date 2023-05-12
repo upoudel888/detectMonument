@@ -34,6 +34,11 @@ def detect_monuments(request):
     # Get the image from the request
     image = request.FILES.get('img')
 
+    # file was not received in the request
+    if(image is None):
+        return Response({"error": "No file received"}, status=400)
+        
+
     # Use PIL to open the image and get run predictions
     predictions = []
     with Image.open(image) as img:
@@ -53,6 +58,9 @@ def detect_monuments_local(request):
         # Get the image from the request
         image = request.FILES.get('img')
 
+        # file was not received in the request
+        if(image is None):
+            return redirect('')
         # Use PIL to open the image and run predictions
         predictions = []
         img_str = ""
