@@ -66,8 +66,7 @@ def detect_monuments_local(request):
         img_str = ""
         with Image.open(image) as img:
             # squish the image to 512 * 512 i.e. create a thumbnail version of it
-            # just for railway.app i'm resizing to 256 256 to fix the memory contraints
-            img.thumbnail((256,256))
+            img.thumbnail((512,512))
             # Get the predictions
             bbox_img,predictions = get_predictions(model,img,return_raw = True)
             # convert the PIL image into byte buffer
